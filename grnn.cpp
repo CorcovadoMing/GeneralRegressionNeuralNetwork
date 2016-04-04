@@ -1,10 +1,10 @@
 #include <cmath>
 #include "grnn.h"
 
-const double activator(const std::vector<double> input, const std::vector<double> xi, const double sigma) {
+const double activator(const std::vector<double> input, const std::vector<double> x, const double sigma) {
 	double distance = 0;
 	for(int i = 0; i < input.size(); i += 1) {
-		distance += std::pow(input[i] - xi[i], 2);
+		distance += std::pow(input[i] - x[i], 2);
 	}
 	return std::exp(-distance/sigma);
 }
