@@ -9,11 +9,15 @@ const double activator(const std::vector<double> input, const std::vector<double
 	return std::exp(-distance/sigma);
 }
 
-const double grnn(const std::vector<double> input, const std::vector< std::vector<double> > train_x, const std::vector<double> train_y, const double sigma) {
-	double factor = 0, divide = 0;
-	for (int i = 0; i < train_x.size(); i += 1) {
-		factor += train_y[i]*activator(input, train_x[i], sigma);
-		divide += activator(input, train_x[i], sigma);
+const std::vector<double> grnn(const std::vector<double> input, const std::vector< std::vector<double> > train_x, const std::vector< std::vector<double> > train_y, const double sigma) {
+	std::vector<double> result;
+	for (int dim = 0; dim < train_y[0].size(); dim += 1) {
+		double factor = 0, divide = 0;
+		for (int i = 0; i < train_x.size(); i += 1) {
+			factor += train_y[i][dim]*activator(input, train_x[i], sigma);
+			divide += activator(input, train_x[i], sigma);
+		}
+		result.push_back(factor/divide);
 	}
-	return factor/divide; 
+	return result; 
 }
