@@ -1,4 +1,4 @@
-#include "grnn.h"
+#include "src/grnn.h"
 #include <vector>
 #include <iostream>
 
